@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Perfis')
+@section('title', "Perfis da Permissão {$permission->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
@@ -8,7 +8,7 @@
         <li class="breadcrumb-item active"><a href="{{ route('profiles.index') }}" class="active">Perfis</a></li>
     </ol>
 
-    <h1>Perfis <a href="{{ route('profiles.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> Adicionar</a></h1>
+    <h1>Perfis da Permissão <strong>{{ $permission->name }} </strong></h1>
 @stop
 
 @section('content')
@@ -35,10 +35,7 @@
                                 {{ $profile->name }}
                             </td>
                             <td style="width:10px;">
-                                {{-- <a href="{{ route('details.plan.index', $profile->url) }}" class="btn btn-primary">Detalhes</a> --}}
-                                <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-warning">VER</a>
-                                <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-warning"><i class="fas fa-lock"></i></a>
+                                <a href="{{ route('profiles.permissions.detach', [$profile->id, $permission->id]) }}" class="btn btn-info">DESVINCULAR</a>
                             </td>
                         </tr>
                     @endforeach
