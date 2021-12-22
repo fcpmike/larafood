@@ -17,10 +17,16 @@ Route::prefix('admin')
         ->group(function(){
 
     /**
+     * Routes Categories
+     */
+    Route::any('categories/search', 'CategoryController@search')->name('categories.search');
+    Route::resource('categories', 'CategoryController');
+
+    /**
      * Routes Users
      */
-    Route::any('users/search', 'ACL\UserController@search')->name('users.search');
-    Route::resource('users', 'ACL\UserController');
+    Route::any('users/search', 'UserController@search')->name('users.search');
+    Route::resource('users', 'UserController');
 
     /**
      * Routes Plan x Profile
