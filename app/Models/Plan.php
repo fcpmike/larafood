@@ -15,11 +15,19 @@ class Plan extends Model
     }
 
     /**
-     * Get Profiles
+     * Return Profiles
      */
     public function profiles()
     {
         return $this->belongsToMany(Profile::class);
+    }
+
+    /**
+     * Return Tenants
+     */
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
     }
 
     public function search($filter = null)
