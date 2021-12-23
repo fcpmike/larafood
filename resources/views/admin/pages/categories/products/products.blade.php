@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Produtos')
+@section('title', "Produtos da Categoria {$category->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
@@ -8,7 +8,7 @@
         <li class="breadcrumb-item active"><a href="{{ route('products.index') }}" class="active">Produtos</a></li>
     </ol>
 
-    <h1>Produtos <a href="{{ route('products.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> Adicionar</a></h1>
+    <h1>Produtos da Categoria <strong>{{ $category->name }} </strong></h1>
 @stop
 
 @section('content')
@@ -16,7 +16,7 @@
         <div class="card-header">
             <form action="{{ route('products.search') }}" method="POST" class="form form-inline">
                 @csrf
-                <input type="text" name="filter" placeholder="Filtrar" class="form-control" value="{{ $filters['filter'] ?? '' }}">
+                <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
                 <button type="submit" class="btn btn-dark">Filtrar</button>
             </form>
         </div>
@@ -24,7 +24,6 @@
             <table class="table table-condensed">
                 <thead>
                     <tr>
-                        <th>Imagem</th>
                         <th>Título</th>
                         <th width="240">Ações</th>
                     </tr>
@@ -33,13 +32,10 @@
                     @foreach ($products as $product)
                         <tr>
                             <td>
-                                <img src="{{ url("storage/{$product->image}") }}" alt="{{ $product->title }}" style="max-width:90px;">
+                                {{ $product->title }}
                             </td>
-                            <td>{{ $product->title }}</td>
                             <td style="width:10px;">
-                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-warning">VER</a>
-                                <a href="{{ route('products.categories', $product->id) }}" class="btn btn-info"><i class="fas fa-layer-group"></i></a>
+                                <a href="{{ route('products.categories.detach', [$product->id, $category->id]) }}" class="btn btn-info">DESVINCULAR</a>
                             </td>
                         </tr>
                     @endforeach

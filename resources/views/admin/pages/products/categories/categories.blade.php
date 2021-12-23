@@ -1,14 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Categorias')
+@section('title', "Categorias do Produto {$product->title}")
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('categories.index') }}" class="active">Categorias</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Produtos</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('products.categories', $product->id) }}" class="active">Categorias</a></li>
     </ol>
 
-    <h1>Categorias <a href="{{ route('categories.create') }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> Adicionar</a></h1>
+    <h1>Categorias do Produto <strong>{{ $product->title }} </strong></h1>
+    <a href="{{ route('products.categories.available', $product->id) }}" class="btn btn-dark"><i class="fas fa-plus-square"></i> Adicionar nova categoria</a>
 @stop
 
 @section('content')
@@ -16,7 +18,7 @@
         <div class="card-header">
             <form action="{{ route('categories.search') }}" method="POST" class="form form-inline">
                 @csrf
-                <input type="text" name="filter" placeholder="Filtrar" class="form-control" value="{{ $filters['filter'] ?? '' }}">
+                <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
                 <button type="submit" class="btn btn-dark">Filtrar</button>
             </form>
         </div>
@@ -25,19 +27,17 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Descrição</th>
                         <th width="240">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($categories as $category)
                         <tr>
-                            <td>{{ $category->name }}</td>
-                            <td>{{ $category->description }}</td>
+                            <td>
+                                {{ $category->name }}
+                            </td>
                             <td style="width:10px;">
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('categories.show', $category->id) }}" class="btn btn-warning">VER</a>
-                                {{-- <a href="{{ route('categories.products', $category->id) }}" class="btn btn-info"><i class="fas fa-layer-group"></i></a> --}}
+                                <a href="{{ route('products.categories.detach', [$product->id, $category->id]) }}" class="btn btn-info">DESVINCULAR</a>
                             </td>
                         </tr>
                     @endforeach
