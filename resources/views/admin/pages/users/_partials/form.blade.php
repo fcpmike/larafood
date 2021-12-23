@@ -2,7 +2,7 @@
 
 <div class="form-group">
     <label>Nome:</label>
-    <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $user->name ?? old('name') }}">
+    <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $user->name ?? old('name') }}" autofocus>
 </div>
 <div class="form-group">
     <label>E-mail:</label>
