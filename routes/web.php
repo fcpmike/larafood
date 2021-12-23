@@ -17,6 +17,12 @@ Route::prefix('admin')
         ->group(function(){
 
     /**
+     * Routes Tables
+     */
+    Route::any('tables/search', 'TableController@search')->name('tables.search');
+    Route::resource('tables', 'TableController');
+
+    /**
      * Routes Plan x Profile
      */
     Route::get('products/{id}/category/{idCategory}/detach', 'CategoryProductController@detachCategoriesProducts')->name('products.categories.detach');

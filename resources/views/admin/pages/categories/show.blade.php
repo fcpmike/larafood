@@ -3,7 +3,7 @@
 @section('title', "Detalhes da Categoria {$category->name}")
 
 @section('content_header')
-    <h1>Destalhes da Categoria <b>{{ $category->name }}</b></h1>
+    <h1>Detalhes da Categoria <b>{{ $category->name }}</b></h1>
 @stop
 
 @section('content')
