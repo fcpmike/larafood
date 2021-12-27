@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', "Detalhes do profileo {$profile->name}")
+@section('title', "Detalhes do Perfil {$profile->name}")
 
 @section('content_header')
-    <h1>Destalhes do perfil <b>{{ $profile->name }}</b></h1>
+    <h1>Destalhes do Perfil <b>{{ $profile->name }}</b></h1>
 @stop
 
 @section('content')
