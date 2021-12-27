@@ -14,7 +14,7 @@
 Route::prefix('admin')
         ->namespace('Admin')
         ->middleware('auth')
-        ->group(function(){
+        ->group(function() {
 
     /**
      * Routes Tables
