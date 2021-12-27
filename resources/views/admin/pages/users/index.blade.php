@@ -37,7 +37,7 @@
                             <td style="width:10px;">
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">Editar</a>
                                 <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning">VER</a>
-                                <a href="{{ route('users.roles', $user->id) }}" class="btn btn-info"><i class="fas fa-address-card">Cargos</i></a>
+                                <a href="{{ route('users.roles', $user->id) }}" class="btn btn-info"><i class="fas fa-address-card"> Cargos</i></a>
                             </td>
                         </tr>
                     @endforeach

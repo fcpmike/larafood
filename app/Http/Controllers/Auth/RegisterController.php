@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Services\TenantService;
+use App\Tenant\Events\TenantCreated;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -54,7 +55,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'min:3', 'max:191'],
             'email' => ['required', 'string', 'email', 'min:3', 'max:191', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'max:16', 'confirmed'],
-            'cnpj' => ['required', 'numeric', 'min:14', 'max:14', 'unique:tenants'],
+            'cnpj' => ['required', 'numeric', 'digits:14', 'unique:tenants'],
             'empresa' => ['required', 'string', 'min:3', 'max:191','unique:tenants,name'],
         ]);
     }
@@ -72,7 +73,10 @@ class RegisterController extends Controller
         }
 
         $tenantService = app(TenantService::class);
+        $user = $tenantService->make($plan, $data);
 
-        return $tenantService->make($plan, $data);
+        event(new TenantCreated($user));
+
+        return $user;
     }
 }
