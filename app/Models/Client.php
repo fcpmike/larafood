@@ -18,4 +18,14 @@ class Client extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function evalutions()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
 }

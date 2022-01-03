@@ -28,6 +28,6 @@ class TableService
 
     public function getTableByIdentify(string $identify)
     {
-        return $this->tableRepository->getTableByIdentify($identify);
+        return $this->tableRepository->getTableByUuid($identify);
     }
 }
