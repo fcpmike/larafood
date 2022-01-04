@@ -27,22 +27,24 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // $permissions = Permission::all();
+        if ($this->app->runningInConsole()) return;
 
-        // foreach ($permissions as $permission) {
-        //     Gate::define($permission->name, function(User $user) use ($permission) {
-        //         return $user->hasPermission($permission->name);
-        //     });
-        // }
+        $permissions = Permission::all();
 
-        // Gate::define('owner', function(User $user, $object) {
-        //     return $user->id === $object->user_id;
-        // });
+        foreach ($permissions as $permission) {
+            Gate::define($permission->name, function(User $user) use ($permission) {
+                return $user->hasPermission($permission->name);
+            });
+        }
 
-        // Gate::before( function(User $user) {
-        //     if ($user->isAdmin()) {
-        //         return true;
-        //     }
-        // });
+        Gate::define('owner', function(User $user, $object) {
+            return $user->id === $object->user_id;
+        });
+
+        Gate::before( function(User $user) {
+            if ($user->isAdmin()) {
+                return true;
+            }
+        });
     }
 }
