@@ -10,8 +10,8 @@ Route::group([
     Route::post('/auth/logout', 'Api\Auth\AuthClientController@logout');
 
     Route::post('/auth/v1/orders/{identifyOrder}/evaluations', 'Api\EvaluationApiController@store');
-    Route::get('auth/v1/my-orders', 'Api\OrderApiController@myOrders');
-    Route::post('auth/v1/orders', 'Api\OrderApiController@store');
+    Route::get('/auth/v1/my-orders', 'Api\OrderApiController@myOrders');
+    Route::post('/auth/v1/orders', 'Api\OrderApiController@store');
 });
 
 Route::group([
@@ -30,6 +30,7 @@ Route::group([
     Route::get('/products/{identify}', 'ProductApiController@show');
     Route::get('/products', 'ProductApiController@productsByTenant');
 
-    Route::post('/orders', 'OrderApiController@store');
     Route::get('/orders/{identify}', 'OrderApiController@show');
+    Route::post('/orders', 'OrderApiController@store');
+
 });

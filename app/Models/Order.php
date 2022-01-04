@@ -33,7 +33,7 @@ class Order extends Model
         return $this->belongsToMany(Product::class);
     }
 
-    public function evalutions()
+    public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
     }
