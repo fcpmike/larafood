@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Routing\Route;
+
 Route::post('/auth/register', 'Api\Auth\RegisterController@store');
 Route::post('/auth/token', 'Api\Auth\AuthClientController@auth');
 
@@ -33,4 +35,11 @@ Route::group([
     Route::get('/orders/{identify}', 'OrderApiController@show');
     Route::post('/orders', 'OrderApiController@store');
 
+});
+
+/**
+ * Test API
+ */
+Route::get('/', function() {
+    return response()->json(['message' => 'ok']);
 });
