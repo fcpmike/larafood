@@ -71,7 +71,7 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
-    <link rel="stylesheet" href="{{ asset('css/custom-dash.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/custom-dash.css') }}"> --}}
     @stack('scripts-header')
 
 </head>
