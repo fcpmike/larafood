@@ -20,15 +20,15 @@ class OrderRepository implements OrderRepositoryInterface
         float $total,
         string $status,
         int $tenantId,
-        string $comment,
+        string $comment = '',
         $clientId = '',
         $tableId = ''
     ) {
         $data = [
+            'tenant_id' => $tenantId,
             'identify' => $identify,
             'total' => $total,
             'status' => $status,
-            'tenant_id' => $tenantId,
             'comment' => $comment,
         ];
 
@@ -39,6 +39,7 @@ class OrderRepository implements OrderRepositoryInterface
 
         return $order;
     }
+
 
     public function getOrderByIdentify(string $identify)
     {
@@ -76,8 +77,36 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function getOrdersByClientId(int $idClient)
     {
-        return $this->entity
-                        ->where('client_id', $idClient)
-                        ->paginate();
+        $orders = $this->entity
+                            ->where('client_id', $idClient)
+                            ->paginate();
+
+        return $orders;
+    }
+
+    public function getOrdersByTenantId(int $idTenant, string $status, string $date = null)
+    {
+        $orders = $this->entity
+                        ->where('tenant_id', $idTenant)
+                        ->where(function ($query) use ($status) {
+                            if ($status != 'all') {
+                                return $query->where('status', $status);
+                            }
+                        })
+                        ->where(function ($query) use ($date) {
+                            if ($date) {
+                                return $query->whereDate('created_at', $date);
+                            }
+                        })
+                        ->get();
+
+        return $orders;
+    }
+
+    public function updateStatusOrder(string $identify, string $status)
+    {
+        $this->entity->where('identify', $identify)->update(['status' => $status]);
+
+        return $this->entity->where('identify', $identify)->first();
     }
 }
