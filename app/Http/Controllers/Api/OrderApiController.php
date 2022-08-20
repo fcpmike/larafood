@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreOrder;
 use App\Http\Requests\Api\TenantFormRequest;
 use App\Http\Resources\OrderResource;
-use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 
@@ -19,6 +18,7 @@ class OrderApiController extends Controller
     {
         $this->orderService = $orderService;
     }
+
 
     public function store(StoreOrder $request)
     {

@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
-use phpDocumentor\Reflection\Types\This;
 
 class OrderResource extends JsonResource
 {
