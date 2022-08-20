@@ -1,8 +1,8 @@
-FROM php:7.4-fpm
+FROM php:8.1.1-fpm
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+# Arguments
+ARG user=fabiano
+ARG uid=1000
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
+    default-mysql-client \
     unzip
 
 # Clear cache
