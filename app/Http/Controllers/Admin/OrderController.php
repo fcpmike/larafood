@@ -10,9 +10,11 @@ class OrderController extends Controller
 {
     private $repository;
 
-    public function __construct(Order $plan)
+    public function __construct(Order $order)
     {
-        $this->repository = $plan;
+        $this->repository = $order;
+
+        $this->middleware(['can:orders']);
     }
 
     public function index()
